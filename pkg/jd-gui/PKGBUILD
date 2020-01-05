@@ -1,0 +1,66 @@
+#MIT License
+#Copyright (c) 2017-2020 phR0ze
+#
+#Permission is hereby granted, free of charge, to any person obtaining a copy
+#of this software and associated documentation files (the "Software"), to deal
+#in the Software without restriction, including without limitation the rights
+#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#copies of the Software, and to permit persons to whom the Software is
+#furnished to do so, subject to the following conditions:
+#
+#The above copyright notice and this permission notice shall be included in all
+#copies or substantial portions of the Software.
+#
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#SOFTWARE.
+
+#-------------------------------------------------------------------------------
+# Maintainer: phR0ze
+#-------------------------------------------------------------------------------
+# Modified version of package from Simon Legner <Simon.Legner@gmail.com>
+# Added the dark theme modification using the Inconsolata-g font
+# Added the _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd' var to launcher
+# Reduced sums to sha256 for readability
+pkgname=jd-gui
+pkgver=1.6.3
+pkgrel=2
+pkgdesc='A standalone graphical utility that displays Java source codes of .class files'
+arch=('any')
+url='http://jd.benow.ca/'
+license=('GPL3')
+depends=('java-runtime' 'ttf-inconsolata-g')
+makedepends=('java-environment=8' 'gradle')
+provides=('jd-gui')
+conflicts=('jd-gui-bin')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/java-decompiler/jd-gui/archive/v$pkgver.tar.gz"
+        "jd-gui"
+        "jd-gui.desktop")
+sha256sums=('0f4ddf659a3ff7cc3c11da9923ff0618aed3b433bf20dd61ec0159c7f19b7cba'
+            '8ea85515512592ebd2a045c13fcda4d50016fd7f2cf2dd8969e48c1cb8b9a410'
+            '4846cb2382fabae07febd9315b19e0a60b3ad7449dcf45e3f7dd535e1f4ca8a6')
+
+prepare() {
+  cd "$srcdir/$pkgname-$pkgver"
+
+  msg2 "Applying theme patch"
+  cp ../../darktheme.xml services/src/main/resources/rsyntaxtextarea/themes/eclipse.xml
+}
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  JAVA_HOME=/usr/lib/jvm/java-8-openjdk/ gradle --no-daemon build --stacktrace
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver/build/libs"
+  install -Dm644 "$pkgname-$pkgver.jar" "$pkgdir/usr/share/java/$pkgname/$pkgname.jar"
+  install -d "$pkgdir/usr/bin"
+  install -Dm755 "$srcdir/jd-gui" "$pkgdir/usr/bin/$pkgname"
+  install -Dm644 "$srcdir/jd-gui.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
+  install -Dm644  "$srcdir/$pkgname-$pkgver/src/linux/resources/jd_icon_128.png" "$pkgdir/usr/share/pixmaps/$pkgname.png"
+}
