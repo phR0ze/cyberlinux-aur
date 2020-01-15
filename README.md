@@ -5,14 +5,6 @@ cyberlinux-aur
 
 cyberlinux aur for updated and custom packages
 
-* [Contribute](#contribute)
-  * [Git-Hook Version Increment](#git-hook-version-increment)
-* [License](#license)
-
-## Contribute <a name="Contribute"/></a>
-Pull requests are always welcome.  However understand that they will be evaluated purely on whether
-or not the change fits with my goals/ideals for the project.
-
 ### Git-Hook Version Increment <a name="git-hook-version-increment"/></a>
 Enable the githooks to have automatic version increments
 
