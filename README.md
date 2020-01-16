@@ -1,9 +1,11 @@
 cyberlinux-aur
-====================================================================================================
 [![build-badge](https://travis-ci.com/phR0ze/cyberlinux-aur.svg?branch=master)](https://travis-ci.com/phR0ze/cyberlinux-aur)
 [![license-badge](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+====================================================================================================
 
-cyberlinux aur for updated and custom packages
+<img align="left" width="48" height="48" src="https://raw.githubusercontent.com/phR0ze/cyberlinux/master/art/logo_256x256.png">
+***cyberlinux-aur*** provides a home for all the updated and custom ***PKGBUILD*** related files
+being maintained for the ***cyberlinux project***.
 
 ### Git-Hook Version Increment <a name="git-hook-version-increment"/></a>
 Enable the githooks to have automatic version increments
