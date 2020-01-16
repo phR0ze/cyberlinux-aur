@@ -7,6 +7,11 @@ cyberlinux-aur
 <b>cyberlinux-aur</b> provides a home for all the updated and custom Arch Linux package related files
 being maintained for the <b>cyberlinux project</b>.
 
+### Disclaimer
+***cyberlinux-aur*** comes with absolutely no guarantees or support of any kind. It is to be used at
+your own risk.  Any damages, issues, losses or problems caused by the use of ***cyberlinux-aur*** are
+strictly the responsiblity of the user and not the developer/creator of ***cyberlinux-aur***.
+
 ### Git-Hook Version Increment <a name="git-hook-version-increment"/></a>
 Enable the githooks to have automatic version increments
 
