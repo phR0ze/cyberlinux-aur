@@ -23,44 +23,31 @@
 # Maintained by phR0ze
 #-------------------------------------------------------------------------------
 pkgname=tiny-media-manager
-pkgver=2.9.16
+pkgver=3.1.5
 pkgrel=1
 pkgdesc="A multi-OS media managment tool"
 arch=('any')
 url="http://www.tinymediamanager.org"
-license=('Apache-2.0')
-depends=(libmediainfo 'java-environment>=8')
-makedepends=(maven imagemagick)
+license=('Apache')
+depends=(libmediainfo 'java-runtime')
+makedepends=(imagemagick)
 install=$pkgname.install
 _gitname="tinyMediaManager"
-
-source=("https://github.com/tinyMediaManager/tinyMediaManager/archive/$_gitname-$pkgver.tar.gz"
+source=("https://release.tinymediamanager.org/v3/dist/tmm_${pkgver}_linux.tar.gz"
   "$pkgname"
   "$pkgname.desktop")
 
-sha256sums=('3cb00cd8b5070fd49d9896035b6a48d1dab2581ba7a19f065e9cc37d3d7bf99e'
-  '24b5c4dac6c12be7d1ca54fa712bd56bac1a4098d62f2155253a2a6b05e96786'
-  '7c60b8c4b7ac62eaf192f797110155c6ea552348cf5f11d3bc6dc6ef8ea70dd5')
-
-build()
-{
-  msg "Building $pkgname..."
-	cd $srcdir/$_gitname-$_gitname-$pkgver
-
-  msg2 "Building using maven"
-	mvn package
-
-  msg2 "Generating installable low resolution icon"
-  convert -background none -resize x32 AppBundler/tmm.png $srcdir/$pkgname.png
-}
+sha256sums=('5db1ba4de4c42b4262d87e7528c48b32fff20c9b73b7db336f2cf0cde35cd406'
+  'f0ca4ec4d3d44aebf333b6b2ad8943cddccad28fcd2109de046204f6f23c71e8'
+  'c49b01e8a10b1f4086600b2a7baea399fbcc48d6edfcfc151e44c000f6aa65c7')
 
 package()
 {
   msg "Packaging $pkgname..."
-	cd $srcdir/$_gitname-$_gitname-$pkgver/dist
+	cd $srcdir
 
-	msg2 "Extract maven built package"
-	tar -xf tmm_$pkgver_*_linux.tar.gz
+  msg2 "Generating installable low resolution icon"
+  convert -background none -resize x32 tmm.png $srcdir/$pkgname.png
 
 	msg2 "Remove uneeded files"
   rm -rf tmm_$pkgver_*
@@ -73,7 +60,7 @@ package()
 
 	msg2 "Install app icons"
   install -Dm644 $srcdir/$pkgname.png -t $pkgdir/usr/share/icons/hicolor/32x32/apps
-  install -Dm644 $srcdir/$_gitname-$_gitname-$pkgver/AppBundler/tmm.png $pkgdir/usr/share/icons/hicolor/128x128/apps/$pkgname.png
+  install -Dm644 $srcdir/tmm.png $pkgdir/usr/share/icons/hicolor/128x128/apps/$pkgname.png
 
 	msg2 "Install desktop launcher"
   install -Dm644 $srcdir/$pkgname.desktop -t $pkgdir/usr/share/applications
