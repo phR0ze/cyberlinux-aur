@@ -30,37 +30,41 @@ arch=('any')
 url="http://www.tinymediamanager.org"
 license=('Apache')
 depends=(libmediainfo 'java-runtime')
-makedepends=(imagemagick)
+makedepends=(maven imagemagick)
 install=$pkgname.install
-_gitname="tinyMediaManager"
-source=("https://release.tinymediamanager.org/v3/dist/tmm_${pkgver}_linux.tar.gz"
+
+_name="tinyMediaManager"
+source=("https://gitlab.com/${_name}/${_name}/-/archive/${_name}-${pkgver}/${_name}-${_name}-${pkgver}.tar.bz2"
   "$pkgname"
   "$pkgname.desktop")
-
-sha256sums=('5db1ba4de4c42b4262d87e7528c48b32fff20c9b73b7db336f2cf0cde35cd406'
+sha256sums=('eb5581fdc6d96ffc1daeeabea966b5e0bd89ca1dc801aced211c469de8b0cb3a'
   'f0ca4ec4d3d44aebf333b6b2ad8943cddccad28fcd2109de046204f6f23c71e8'
   'c49b01e8a10b1f4086600b2a7baea399fbcc48d6edfcfc151e44c000f6aa65c7')
+
+build()
+{
+  msg "Building $pkgname..."
+  cd $srcdir/$_name-$_name-$pkgver
+
+  msg2 "Building using maven"
+  mvn package
+
+  msg2 "Generating installable low resolution icon"
+  convert -background none -resize x32 AppBundler/tmm.png $srcdir/$pkgname.png
+}
 
 package()
 {
   msg "Packaging $pkgname..."
-	cd $srcdir
+  mkdir -p $pkgdir/usr/share/$pkgname
+  cd $srcdir/$_name-$_name-$pkgver
 
-  msg2 "Generating installable low resolution icon"
-  convert -background none -resize x32 tmm.png $srcdir/$pkgname.png
-
-	msg2 "Remove uneeded files"
-  rm -rf tmm_$pkgver_*
-
-	msg2 "Install package directories"
-  find . -type d -exec install -dm755 $pkgdir/usr/share/$pkgname/{} \;
-
-	msg2 "Install package files"
-  find . -type f -exec install -Dm644 {} $pkgdir/usr/share/$pkgname/{} \;
+  msg2 "Extract maven built package"
+  tar -xf dist/tmm_${pkgver}_linux.tar.gz -C $pkgdir/usr/share/$pkgname
 
 	msg2 "Install app icons"
   install -Dm644 $srcdir/$pkgname.png -t $pkgdir/usr/share/icons/hicolor/32x32/apps
-  install -Dm644 $srcdir/tmm.png $pkgdir/usr/share/icons/hicolor/128x128/apps/$pkgname.png
+  install -Dm644 $srcdir/$_name-$_name-$pkgver/AppBundler/tmm.png $pkgdir/usr/share/icons/hicolor/128x128/apps/$pkgname.png
 
 	msg2 "Install desktop launcher"
   install -Dm644 $srcdir/$pkgname.desktop -t $pkgdir/usr/share/applications
