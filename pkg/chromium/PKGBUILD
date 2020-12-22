@@ -30,16 +30,16 @@
 # https://git.archlinux.org/svntogit/packages.git/tree/repos/extra-x86_64?h=packages/chromium
 #-------------------------------------------------------------------------------
 pkgname=chromium
-pkgver=76.0.3809.100
-pkgrel=4
+pkgver=80.0.3987.106
+pkgrel=1
 _launcher_ver=6
 pkgdesc="Chromium focused on privacy and the removal of Google Orwellian tracking"
 arch=('x86_64')
 url="https://www.chromium.org/Home"
 license=('BSD')
-# jsoncpp was missing from the archlinux package
+# pepper-flash and jsoncpp were missing from the archlinux package
 depends=('gtk3' 'nss' 'alsa-lib' 'xdg-utils' 'libxss' 'libcups' 'libgcrypt'
-         'ttf-font' 'systemd' 'dbus' 'libpulse' 'pciutils' 'json-glib'
+         'ttf-liberation' 'systemd' 'dbus' 'libpulse' 'pciutils' 'json-glib'
          'desktop-file-utils' 'hicolor-icon-theme' 'pepper-flash' 'jsoncpp=1.9.1')
 makedepends=('python' 'python2' 'gperf' 'yasm' 'mesa' 'ninja' 'nodejs' 'git'
              'pipewire' 'clang' 'lld' 'gn' 'java-runtime-headless')
@@ -49,7 +49,7 @@ optdepends=('libva-intel-driver: for hardware video acceleration with Intel GPUs
 install=chromium.install
 source=(https://commondatastorage.googleapis.com/chromium-browser-official/$pkgname-$pkgver.tar.xz
         chromium-launcher-$_launcher_ver.tar.gz::https://github.com/phR0ze/chromium-launcher/archive/v$_launcher_ver.tar.gz)
-sha256sums=('8cd93ada3e0837ced512f69783400991d3b82e0d9622e04fab5922877577d26d'
+sha256sums=('2ead924b4414a8a5f085fa0e0df56563ef41bd4290cc403c05d5beec238cbe82'
             '691a1f6a6dd8bca775fde4216153735af9d167f4d5774f007a785bfcb805655e')
 
 # Possible replacements are listed in build/linux/unbundle/replace_gn_files.py

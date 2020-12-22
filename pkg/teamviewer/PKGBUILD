@@ -23,7 +23,7 @@
 # Maintained by phR0ze
 #-------------------------------------------------------------------------------
 pkgname=teamviewer
-pkgver=14.5.5819
+pkgver=15.11.6
 pkgrel=1
 pkgdesc='All-In-One Software for Remote Support and Online Meetings'
 arch=(x86_64)
@@ -38,7 +38,7 @@ source=("https://dl.tvcdn.de/download/linux/version_${pkgver%%.*}x/teamviewer_${
   ${pkgname}d.service
   $pkgname)
 sha256sums=(
-  17922653b9f1cd8bc4a5e25ec290c16421a15ee1d10116f7c12d161915022def
+  896a52eacfb0ad691273e90d65ad4e2fb76fe958826b97207000e7ba879d8560
   4897ef7a6d42fe5ef2e41b772b9498c1349f18142906419d8960f9b9824cc90c
   c123ad11cb2ba7a05724f65cb18344ab2516a4da92e9043773acf044a7504431
   c446ba6f9e3398c09a80ecf02a464370eec2ef485e2855d9eddd18dfa3fb7c48

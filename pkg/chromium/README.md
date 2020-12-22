@@ -264,6 +264,8 @@ Example target version `76.0.3809.100`:
 
    # Manually compare and update as needed.
    $ diff PKGBUILD chromium/PKGBUILD
+
+   # Comment out all the _system_libs to make chromium more durable across upgrades
    ```
 2. Update `patches/arch` by hand
    ```bash
