@@ -10,6 +10,7 @@
 */*.gem
 */*.zip
 */*.sign
+*/*.tgz
 */*.pkg.*
 arch-install-scripts/arch-install-scripts
 awf/awf
