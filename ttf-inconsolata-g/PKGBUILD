@@ -1,0 +1,23 @@
+#-------------------------------------------------------------------------------
+# Maintainer: phR0ze
+#
+# Adapted from the AUR
+# https://aur.archlinux.org/packages/ttf-inconsolata-g
+#-------------------------------------------------------------------------------
+pkgname=ttf-inconsolata-g
+pkgver=1.0.0
+pkgrel=1
+conflicts=('ttf-inconsolata-g')
+provides=('ttf-inconsolata-g')
+pkgdesc="Monospace font ideal for developing code"
+url="http://www.fantascienza.net/leonardo/"
+license=('unknown')
+depends=()
+source=('http://www.fantascienza.net/leonardo/ar/inconsolatag/inconsolata-g_font.zip')
+install=ttf-inconsolata-g.install
+arch=('any')
+md5sums=('c36e53cb9022f8096fb78a0aae00cbb0')
+
+package() {
+    install -Dm644 $srcdir/Inconsolata-g.ttf $pkgdir/usr/share/fonts/TTF/ttf-inconsolata-g.ttf
+}
