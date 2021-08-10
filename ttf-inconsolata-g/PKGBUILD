@@ -19,5 +19,5 @@ arch=('any')
 md5sums=('c36e53cb9022f8096fb78a0aae00cbb0')
 
 package() {
-    install -Dm644 $srcdir/Inconsolata-g.ttf $pkgdir/usr/share/fonts/TTF/ttf-inconsolata-g.ttf
+    install -Dm644 "${srcdir}/Inconsolata-g.ttf" "${pkgdir}/usr/share/fonts/TTF/ttf-inconsolata-g.ttf"
 }
