@@ -23,7 +23,7 @@
 # Maintained by phR0ze
 #-------------------------------------------------------------------------------
 pkgname=tiny-media-manager
-pkgver=3.1.5
+pkgver=4.1.6
 pkgrel=1
 pkgdesc="A multi-OS media managment tool"
 arch=('any')
@@ -37,40 +37,40 @@ _name="tinyMediaManager"
 source=("https://gitlab.com/${_name}/${_name}/-/archive/${_name}-${pkgver}/${_name}-${_name}-${pkgver}.tar.bz2"
   "$pkgname"
   "$pkgname.desktop")
-sha256sums=('eb5581fdc6d96ffc1daeeabea966b5e0bd89ca1dc801aced211c469de8b0cb3a'
+sha256sums=('5d7d2b340ea0ddb952f9ce8f0a2a9116ede6f07fdcc195354e6ecadec0035b97'
   'f0ca4ec4d3d44aebf333b6b2ad8943cddccad28fcd2109de046204f6f23c71e8'
   'c49b01e8a10b1f4086600b2a7baea399fbcc48d6edfcfc151e44c000f6aa65c7')
 
 build()
 {
   msg "Building $pkgname..."
-  cd $srcdir/$_name-$_name-$pkgver
+  cd "$srcdir/$_name-$_name-$pkgver"
 
   msg2 "Building using maven"
   mvn package
 
   msg2 "Generating installable low resolution icon"
-  convert -background none -resize x32 AppBundler/tmm.png $srcdir/$pkgname.png
+  convert -background none -resize x32 AppBundler/tmm.png "$srcdir/$pkgname.png"
 }
 
 package()
 {
   msg "Packaging $pkgname..."
-  mkdir -p $pkgdir/usr/share/$pkgname
-  cd $srcdir/$_name-$_name-$pkgver
+  mkdir -p "$pkgdir/usr/share/$pkgname"
+  cd "$srcdir/$_name-$_name-$pkgver"
 
   msg2 "Extract maven built package"
-  tar -xf dist/tmm_${pkgver}_linux.tar.gz -C $pkgdir/usr/share/$pkgname
+  tar -xf dist/tmm_${pkgver}_linux.tar.gz -C "$pkgdir/usr/share/$pkgname"
 
 	msg2 "Install app icons"
-  install -Dm644 $srcdir/$pkgname.png -t $pkgdir/usr/share/icons/hicolor/32x32/apps
-  install -Dm644 $srcdir/$_name-$_name-$pkgver/AppBundler/tmm.png $pkgdir/usr/share/icons/hicolor/128x128/apps/$pkgname.png
+  install -Dm644 "$srcdir/$pkgname.png" -t "$pkgdir/usr/share/icons/hicolor/32x32/apps"
+  install -Dm644 "$srcdir/$_name-$_name-$pkgver/AppBundler/tmm.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/$pkgname.png"
 
 	msg2 "Install desktop launcher"
-  install -Dm644 $srcdir/$pkgname.desktop -t $pkgdir/usr/share/applications
+  install -Dm644 "$srcdir/$pkgname.desktop" -t "$pkgdir/usr/share/applications"
 
 	msg2 "Install launcher"
-	install -Dm755 $srcdir/$pkgname -t $pkgdir/usr/bin
+	install -Dm755 "$srcdir/$pkgname" -t "$pkgdir/usr/bin"
 }
 
 # vim: ts=2:sw=2:sts=2

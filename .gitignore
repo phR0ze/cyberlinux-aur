@@ -2,6 +2,7 @@
 *.swp
 */src/
 */pkg/
+*/*.exe
 */*.xz
 */*.gz
 */*.bz2
@@ -27,3 +28,4 @@ ruby-nub/ruby-nub
 vscode/vscode
 cyberlinux-grub/cyberlinux-grub
 cyberlinux-screenfetch/screenFetch
+winff/winff
