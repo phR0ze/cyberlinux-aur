@@ -31,7 +31,7 @@ arch=('x86_64')
 depends=('python3' 'python-cairo')
 license=('GPL3')
 source=("${pkgname-$pkgver}.tar.gz::https://github.com/phR0ze/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
-sha256sums=('0f42f3fa47e40d314e9ccb3b3aa3d972fe5dd79b6d15727b335eb87ce3afc328')
+sha256sums=('67cde83de21c452af0e3c29f6584cb2876eb1997669ed8421f9c88134ea074ef')
 
 package()
 {
