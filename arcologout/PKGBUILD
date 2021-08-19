@@ -24,11 +24,11 @@
 #-------------------------------------------------------------------------------
 pkgname=arcologout
 pkgver=1.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Simple clean ArcoLinux logout screen"
 url="https://github.com/phR0ze/arcologout"
 arch=('x86_64')
-depends=('python3' 'python-cairo')
+depends=('python3' 'python-cairo' 'python-gobject')
 license=('GPL3')
 source=("${pkgname-$pkgver}.tar.gz::https://github.com/phR0ze/${pkgname}/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('67cde83de21c452af0e3c29f6584cb2876eb1997669ed8421f9c88134ea074ef')
