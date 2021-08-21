@@ -1,29 +1,29 @@
-#MIT License
-#Copyright (c) 2017-2020 phR0ze
-#
-#Permission is hereby granted, free of charge, to any person obtaining a copy
-#of this software and associated documentation files (the "Software"), to deal
-#in the Software without restriction, including without limitation the rights
-#to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-#copies of the Software, and to permit persons to whom the Software is
-#furnished to do so, subject to the following conditions:
-#
-#The above copyright notice and this permission notice shall be included in all
-#copies or substantial portions of the Software.
-#
-#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-#SOFTWARE.
+# MIT License
+# Copyright (c) 2017-2020 phR0ze
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
 #-------------------------------------------------------------------------------
 # Maintained by phR0ze
 #-------------------------------------------------------------------------------
 pkgname=teamviewer
-pkgver=15.11.6
+pkgver=15.20.6
 pkgrel=1
 pkgdesc='All-In-One Software for Remote Support and Online Meetings'
 arch=(x86_64)
@@ -38,7 +38,7 @@ source=("https://dl.tvcdn.de/download/linux/version_${pkgver%%.*}x/teamviewer_${
   ${pkgname}d.service
   $pkgname)
 sha256sums=(
-  896a52eacfb0ad691273e90d65ad4e2fb76fe958826b97207000e7ba879d8560
+  3bf8b9368e748e8d412e8286a6570e567f7ae8cbed5d650d0b63adff1aa22b59
   4897ef7a6d42fe5ef2e41b772b9498c1349f18142906419d8960f9b9824cc90c
   c123ad11cb2ba7a05724f65cb18344ab2516a4da92e9043773acf044a7504431
   c446ba6f9e3398c09a80ecf02a464370eec2ef485e2855d9eddd18dfa3fb7c48
@@ -46,14 +46,14 @@ sha256sums=(
 
 prepare()
 {
-  cd $srcdir
+  cd "$srcdir"
   msg "Building $pkgname..."
 	tar -xf data.tar.xz
 }
 
 package()
 {
-  cd $srcdir
+  cd "$srcdir"
   msg "Packaging $pkgname..."
 
   msg2 "Remove lib23 dependencies via libdepend and cruft"
@@ -62,20 +62,20 @@ package()
   rm -rf opt/teamviewer/tv_bin/xdg-utils/xdg-email
 
   msg2 "Packaging dirs and files"
-  cp -dr --no-preserve=ownership {etc,opt,usr,var} $pkgdir
+  cp -dr --no-preserve=ownership {etc,opt,usr,var} "$pkgdir"
 
   msg2 "Packaging launcher"
-  install -Dm755 $pkgname -t $pkgdir/usr/bin
+  install -Dm755 $pkgname -t "$pkgdir/usr/bin"
 
   msg2 "Packaging desktop entry"
-  install -Dm644 $pkgname.desktop -t $pkgdir/usr/share/applications
+  install -Dm644 $pkgname.desktop -t "$pkgdir/usr/share/applications"
 
   msg2 "Packaging systemd unit"
-  install -Dm644 ${pkgname}d.service -t $pkgdir/usr/lib/systemd/system
-  install -dm755 $pkgdir/etc/systemd/system/multi-user.target.wants
+  install -Dm644 ${pkgname}d.service -t "$pkgdir/usr/lib/systemd/system"
+  install -dm755 "$pkgdir/etc/systemd/system/multi-user.target.wants"
 
   msg2 "Packaging additional files"
-  install -Dm644 opt/teamviewer/doc/License.txt $pkgdir/usr/share/licenses/$pkgname/LICENSE
+  install -Dm644 opt/teamviewer/doc/License.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
 # vim: ts=2:sw=2:sts=2
