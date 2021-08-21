@@ -8,6 +8,7 @@ Requires=dbus.service
 Type=forking
 PIDFile=/run/teamviewerd.pid
 ExecStart=/opt/teamviewer/tv_bin/teamviewerd -d
+ExecStartPost=/opt/teamviewer/tv_bin/config
 Restart=on-abort
 TimeoutStopSec=1
 StartLimitInterval=60

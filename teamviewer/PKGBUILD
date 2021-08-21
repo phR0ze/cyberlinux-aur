@@ -31,17 +31,20 @@ url='http://www.teamviewer.com'
 license=('custom')
 options=('!strip')
 conflicts=('teamviewer-beta')
-depends=(hicolor-icon-theme qt5-quickcontrols qt5-x11extras qt5-webkit)
+depends=(hicolor-icon-theme qt5-quickcontrols qt5-x11extras qt5-webkit minizip)
 install=teamviewer.install
 source=("https://dl.tvcdn.de/download/linux/version_${pkgver%%.*}x/teamviewer_${pkgver}_amd64.deb"
   $pkgname.desktop
   ${pkgname}d.service
-  $pkgname)
+  $pkgname
+  config
+)
 sha256sums=(
   3bf8b9368e748e8d412e8286a6570e567f7ae8cbed5d650d0b63adff1aa22b59
   4897ef7a6d42fe5ef2e41b772b9498c1349f18142906419d8960f9b9824cc90c
-  c123ad11cb2ba7a05724f65cb18344ab2516a4da92e9043773acf044a7504431
+  ccd052cdff81ea8c05e81c1653bfb010f5443007e85bfb3ce866436b0b5602ec
   c446ba6f9e3398c09a80ecf02a464370eec2ef485e2855d9eddd18dfa3fb7c48
+  c19927fe8c131ed36d5ec993fd58e35567bd36678e3aa51b5002adc50f049fc7
 )
 
 prepare()
@@ -63,6 +66,9 @@ package()
 
   msg2 "Packaging dirs and files"
   cp -dr --no-preserve=ownership {etc,opt,usr,var} "$pkgdir"
+
+  msg2 "Packaging configuration script"
+  install -Dm755 config -t "$pkgdir/opt/$pkgname/tv_bin"
 
   msg2 "Packaging launcher"
   install -Dm755 $pkgname -t "$pkgdir/usr/bin"
