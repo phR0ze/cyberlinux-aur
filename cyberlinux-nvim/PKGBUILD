@@ -1,0 +1,86 @@
+# MIT License
+# Copyright (c) 2021 phR0ze
+# 
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+# 
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+# 
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+#-------------------------------------------------------------------------------
+# Maintained by phR0ze
+#-------------------------------------------------------------------------------
+pkgname=cyberlinux-nvim
+pkgver=0.0.1
+pkgrel=1
+pkgdesc="Installs and configures neovim, vim-plug and default plugins for cyberlinux"
+arch=('any')
+url="https://github.com/phR0ze/cyberlinux-aur/tree/master/cyberlinux-nvim"
+license=('MIT')
+makedepends=('git' 'curl')
+depends=('neovim')
+source=("init.vim")
+sha256sums=('dbe9dbbd9da1b0a6d0ee5e2ec4460682230177a5e512c36c1b902aa4d4956386')
+
+plugins=(
+  'scrooloose/nerdtree'                  # File explorer sidebar
+  'vim-airline/vim-airline'              # Awesome status bar at bottom with git support
+  'vim-airline/vim-airline-themes'       # Vim Airline themes
+  'ryanoasis/vim-devicons'               # Sweet folder/file icons for nerd tree
+
+  # ColorSchemes
+  'ajmwagar/vim-deus'                    # deus
+  'vim-scripts/CycleColor'               # Color scheme cycler
+  'YorickPeterse/happy_hacking.vim'      # happy_hacking
+  'w0ng/vim-hybrid'                      # hybrid
+  'kristijanhusak/vim-hybrid-material'   # hybrid_material
+  'nanotech/jellybeans.vim'              # jellybeans
+  'dikiaap/minimalist'                   # minimalist
+  'marcopaganini/termschool-vim-theme'   # termschool
+
+  # Syntax highlighting
+  'stephpy/vim-yaml'                     # yaml
+  'hail2u/vim-css3-syntax'               # css3
+  'kurayama/systemd-vim-syntax'          # systemd
+)
+
+# $(pwd) is $srcdir
+package()
+{
+  msg "Installing neovim default config..."
+  install -Dm 644 "$srcdir"/init.vim -t "$pkgdir"/etc/skel/.config/nvim
+
+  msg "Installing vim-plug plugin manager..."
+
+  msg2 "Creating plugin directory structure..."
+  install -dm 755 "$pkgdir"/etc/skel/.config/nvim/{autoload,plugins}
+
+  msg2 "Downloading vim-plug plugin manager..."
+  curl -fLo "$pkgdir"/etc/skel/.config/nvim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+  msg "Installing plugins..."
+  pushd "$pkgdir"/etc/skel/.config/nvim/plugins
+  for repo in ${plugins[@]}; do
+    msg2 "Installing plugin $repo"
+    plugin=$(basename $repo)
+    if [ ! -d $plugin ]; then
+      git clone "https://github.com/${repo}"
+      rm -rf $plugin/.git
+    fi
+  done
+  popd
+}
+
+# vim: ts=2:sw=2:sts=2
