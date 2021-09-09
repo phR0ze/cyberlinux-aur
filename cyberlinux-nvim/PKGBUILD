@@ -23,7 +23,7 @@
 # Maintained by phR0ze
 #-------------------------------------------------------------------------------
 pkgname=cyberlinux-nvim
-pkgver=0.0.1
+pkgver=0.0.2
 pkgrel=1
 pkgdesc="Installs and configures neovim, vim-plug and default plugins for cyberlinux"
 arch=('any')
@@ -32,7 +32,7 @@ license=('MIT')
 makedepends=('git' 'curl')
 depends=('neovim')
 source=("init.vim")
-sha256sums=('dbe9dbbd9da1b0a6d0ee5e2ec4460682230177a5e512c36c1b902aa4d4956386')
+sha256sums=('31656f50dc30738b9cf1b9a260f062ffcbc299195b8bfa4cf9d77d4719205f79')
 
 plugins=(
   'scrooloose/nerdtree'                  # File explorer sidebar

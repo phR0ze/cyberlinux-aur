@@ -198,6 +198,7 @@ augroup FiletypeSettings
   au FileType make setl noexpandtab
   au FileType vim setl foldmethod=marker
   au FileType yaml setl ts=2 sw=2 sts=2
+  au BufRead,BufNewFile *.menu set filetype=xml
 augroup END
 
 " DevIcons Settings
