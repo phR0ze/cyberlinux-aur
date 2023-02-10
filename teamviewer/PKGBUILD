@@ -23,7 +23,7 @@
 # Maintained by phR0ze
 #-------------------------------------------------------------------------------
 pkgname=teamviewer
-pkgver=15.20.6
+pkgver=15.38.3
 pkgrel=1
 pkgdesc='All-In-One Software for Remote Support and Online Meetings'
 arch=(x86_64)
@@ -31,7 +31,7 @@ url='http://www.teamviewer.com'
 license=('custom')
 options=('!strip')
 conflicts=('teamviewer-beta')
-depends=(hicolor-icon-theme qt5-quickcontrols qt5-x11extras qt5-webkit minizip)
+depends=(hicolor-icon-theme qt5-quickcontrols qt5-x11extras qt5-webengine qt5-svg)
 install=teamviewer.install
 source=("https://dl.tvcdn.de/download/linux/version_${pkgver%%.*}x/teamviewer_${pkgver}_amd64.deb"
   $pkgname.desktop
@@ -40,7 +40,7 @@ source=("https://dl.tvcdn.de/download/linux/version_${pkgver%%.*}x/teamviewer_${
   config
 )
 sha256sums=(
-  3bf8b9368e748e8d412e8286a6570e567f7ae8cbed5d650d0b63adff1aa22b59
+  f861a9195f2b975e5542f3d10363d69e0408e15a310ab67402b126f4581d3951
   4897ef7a6d42fe5ef2e41b772b9498c1349f18142906419d8960f9b9824cc90c
   ccd052cdff81ea8c05e81c1653bfb010f5443007e85bfb3ce866436b0b5602ec
   c446ba6f9e3398c09a80ecf02a464370eec2ef485e2855d9eddd18dfa3fb7c48
