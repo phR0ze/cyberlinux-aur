@@ -79,9 +79,6 @@ package()
   msg2 "Packaging systemd unit"
   install -Dm644 ${pkgname}d.service -t "$pkgdir/usr/lib/systemd/system"
   install -dm755 "$pkgdir/etc/systemd/system/multi-user.target.wants"
-
-  msg2 "Packaging additional files"
-  install -Dm644 opt/teamviewer/doc/License.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 
 # vim: ts=2:sw=2:sts=2
