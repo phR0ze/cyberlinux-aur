@@ -1,6 +1,11 @@
 # Building this pinned version `6.4.2` as version `6.4_20230502` dropped the environment
 # variable needed to get tput colored output for a CVE fix
 # https://gitlab.archlinux.org/archlinux/packaging/packages/ncurses/-/commit/3c2606603aa4a5a3b2d29e560a1bc14986153f49#9b9baac1eb9b72790eef5540a1685306fc43fd6c
+# 
+# To build you'll need to add the pgpkey
+# 1. Browse to sudo pacman-key --recv-keys 19882D92DDA4C400C22C0D56CC2AF4472167BE03
+# 2. Copy paste the key block to a file 'keyfile'
+# 3. Import with gpg: gpg --import keyfile
 #
 # Maintainer:  David Runge <dvzrv@archlinux.org>
 # Contributor:  Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
